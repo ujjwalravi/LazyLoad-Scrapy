@@ -19,8 +19,9 @@ class LazyLoad(scrapy.Spider):
             #response.follow(nextPage, self.parse)
             data=json.loads(response.text)
             for quote in data["quotes"]:
-                print(quote)
-                yield {"quote": quote["text"]}
+                yield {"Quotes": quote["text"]}
+                yield {"AuthorName": quote["author"]["name"]}
+                yield {"Tags": quote["tags"]}
             if data["has_next"]:
                 self.page += 1
                 #url = "http://quotes.toscrape.com/api/quotes?page={}".format(self.page)
